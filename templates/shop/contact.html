@@ -1,0 +1,35 @@
+{%extends 'shop/basic.html'%}
+{% block title %}Contact{% endblock %}
+{%block body%}
+<div class="container">
+    <h2>Contact for query</h2>
+<form method="post"> {% csrf_token %}
+  <div class="form-group">
+    <label for="name">Name</label>
+    <input type="text" class="form-control" id="name" placeholder="Your name" name="name">
+  </div>
+ <div class="form-group">
+    <label for="email">Your email</label>
+    <input type="email" class="form-control" id="email" placeholder="Your email" name="email">
+  </div>
+     <div class="form-group">
+    <label for="phone">Phone no</label>
+    <input type="number" class="form-control" id="phone" placeholder="Your phone no." name="phone">
+  </div>
+     <div class="form-group">
+    <label for="query">Query or Complaint</label>
+    <input type="text" class="form-control" id="query" placeholder="Your query or complaint" name="query">
+  </div>
+<button class="btn btn-primary" type="submit">Submit</button>
+</form>
+</div>
+{%endblock%}
+{%block js%}
+<script>
+{%if submit%}
+alert('Your query is registered.');
+document.location="/shop";
+localStorage.clear();
+{%endif%}
+</script>
+{%endblock%}
