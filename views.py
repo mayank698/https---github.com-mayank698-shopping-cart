@@ -1,7 +1,6 @@
 from django.shortcuts import render
-from .models import product,Contact,Order
+from .models import product,Contact,Order,OrderUpdate
 from math import ceil
-from django.http import HttpResponse
 def index(request):
     allprods=[]
     catprods=product.objects.values('category','id')
@@ -43,6 +42,8 @@ def checkout(request):
         zip_code=request.POST.get('zip_code','')
         order=Order(items_json=items_json,name=name, email=email, address=address, city=city, zip_code=zip_code, phone=phone, state=state)
         order.save()
+        update = OrderUpdate(order_id=order.order_id, update_desc="The order has been placed")
+        update.save()
         thank=True;
         id=order.order_id
         return render(request,"shop/checkout.html",{'thank':thank,'id':id})
